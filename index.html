@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sachin Saxena</title>
+<meta name="description" content="Sachin Saxena — Product Manager for mobile & AI products. Ex-Android engineer, builder of OutLoud, teardowns, PRDs and a daily PM puzzle.">
+<meta property="og:title" content="Sachin Saxena — Product Manager, Mobile & AI">
+<meta property="og:description" content="Engineer-turned-PM who ships AI products. Ask the portfolio, play the daily PM decision, read the changelog.">
+<meta name="theme-color" content="#0B0E14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="petals" aria-hidden="true"></canvas>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#top" aria-label="Sachin Saxena, back to top">
+      <span class="brand-mark" aria-hidden="true">S</span>
+      <span class="brand-name">sachin<span class="dim">.pm</span></span>
+      <span class="ver">v4.0</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#changelog">Changelog</a>
+      <a href="#teardowns">Teardowns</a>
+      <a href="#playground">Playground</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="top-actions">
+      <button class="kbd-btn" id="cmdk-open" type="button" aria-label="Open command menu">
+        <span class="kbd-label">Jump to…</span><kbd>⌘K</kbd>
+      </button>
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch color theme">
+        <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="status"><span class="pulse" aria-hidden="true"></span>Open to APM / PM roles · Delhi NCR</p>
+      <h1>I turn fuzzy problems into <mark class="hl">shipped</mark> AI&nbsp;products.</h1>
+      <p class="lead">Product Manager for mobile &amp; AI. I wrote Kotlin for three years before I wrote PRDs, so my specs hold up when engineering reads them. Today I lead product and mobile for two AI healthcare apps at IF MedTech. On the side, I built and shipped OutLoud, a voice-first AI speaking coach, on my own.</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#work">See the work <span aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="#playground">Play PM for 60 seconds</a>
+      </div>
+      <p class="welcome" id="welcome" hidden></p>
+    </div>
+
+    <div class="ask" id="ask" role="region" aria-label="Ask my portfolio">
+      <div class="ask-head">
+        <span class="ask-title"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4Z" fill="currentColor"/></svg>Ask my portfolio</span>
+        <span class="ask-meta">local retrieval · 0 API calls</span>
+      </div>
+      <div class="ask-log" id="ask-log" aria-live="polite">
+        <div class="msg q">What are you working on right now?</div>
+        <div class="msg a"><p>I'm Mobile Lead for Product &amp; Engineering at IF MedTech. I own requirement-to-release for two AI healthcare apps, Dr. Skin AI and Oravue AI. Recently I redesigned the Dr. Skin AI dashboard around direct user feedback, choosing usability over technical convenience.</p><div class="src"><span>retrieved</span> Experience › IF MedTech</div></div>
+      </div>
+      <div class="ask-chips" id="ask-chips"></div>
+      <form class="ask-form" id="ask-form" autocomplete="off">
+        <label class="sr" for="ask-input">Ask a question about Sachin</label>
+        <span class="prompt" aria-hidden="true">›</span>
+        <input id="ask-input" name="q" type="text" placeholder="Ask anything… e.g. how do you prioritize?">
+        <button type="submit" aria-label="Ask">↵</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <dl class="stats">
+      <div><dt>~4 yrs</dt><dd>building mobile &amp; AI products</dd></div>
+      <div><dt>2</dt><dd>AI health products owned at IF MedTech</dd></div>
+      <div><dt>3</dt><dd>0→1 launches: PlusX, Suraksha, OutLoud</dd></div>
+      <div><dt>100K+</dt><dd>subscribers on my YouTube channel</dd></div>
+      <div><dt>5,000+</dt><dd>developers &amp; students mentored</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="section" id="work">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Work · 6 products</p>
+      <h2>Products I've owned, shipped, or built from zero.</h2>
+      <p class="sec-sub">Each card names the call that shaped the product.</p>
+    </header>
+
+    <div class="bento">
+      <article class="tile tile-hero" id="outloud">
+        <div class="tile-top">
+          <span class="chip ok">Live · built solo</span>
+          <span class="chip">AI · Voice</span>
+        </div>
+        <h3>OutLoud <span class="h-sub">AI English speaking coach</span></h3>
+        <p>Three spoken questions, one AI interviewer, one honest scorecard. Built for people who read and write English well but freeze when they have to say it out loud.</p>
+
+        <div class="pipe" id="pipe" data-outage="false" data-privacy="false">
+          <div class="stage">
+            <span class="stage-label">1 · Question</span>
+            <div class="node n-llm">Gemini<small>interview logic</small></div>
+            <div class="node n-bank">Local question bank<small>fallback</small></div>
+          </div>
+          <div class="wire" aria-hidden="true"></div>
+          <div class="stage">
+            <span class="stage-label">2 · Voice</span>
+            <div class="node">Bulbul v3<small>Sarvam AI</small></div>
+          </div>
+          <div class="wire" aria-hidden="true"></div>
+          <div class="stage device">
+            <span class="stage-label">3 · Answer <em>on device</em></span>
+            <div class="node n-audio">Mic → speech-to-text<small>zero-latency, audio stays</small></div>
+          </div>
+          <div class="wire w-text" aria-hidden="true"><span>text only</span></div>
+          <div class="stage">
+            <span class="stage-label">4 · Feedback</span>
+            <div class="node">Scorecard<small>+ session analytics</small></div>
+          </div>
+        </div>
+        <div class="pipe-controls">
+          <button class="toggle" id="t-outage" type="button" aria-pressed="false"><span class="sw" aria-hidden="true"></span>Simulate a Gemini outage</button>
+          <button class="toggle" id="t-privacy" type="button" aria-pressed="false"><span class="sw" aria-hidden="true"></span>Show what leaves the phone</button>
+        </div>
+        <p class="pipe-note" id="pipe-note">One loop of an OutLoud session. Flip the toggles to see two product decisions.</p>
+
+        <div class="tile-foot">
+          <a class="link" href="https://out-loud-mu.vercel.app/" target="_blank" rel="noopener">Try it live ↗</a>
+          <a class="link" href="https://github.com/ytsaxena/OutLoud" target="_blank" rel="noopener">Source ↗</a>
+          <span class="metric">Tracks session starts, completions, skip rate</span>
+        </div>
+      </article>
+
+      <article class="tile">
+        <div class="tile-top"><span class="chip">IF MedTech · 2025–now</span><span class="chip">AI · Health</span></div>
+        <h3>Dr. Skin AI &amp; Oravue AI</h3>
+        <p>Own requirement-to-release for two AI healthcare apps, turning client and user needs into sprint scope across engineering, QA and design. I'm the client's main point of contact.</p>
+        <p class="lens"><span>The call</span>Redesigned the Dr. Skin AI dashboard from user feedback, choosing usability over technical convenience.</p>
+        <div class="tile-foot"><span class="metric">Wrote release + compliance docs before Play Store submission</span></div>
+      </article>
+
+      <article class="tile">
+        <div class="tile-top"><span class="chip ok">On Play Store</span><span class="chip">0→1 · Safety</span></div>
+        <h3>Suraksha <span class="h-sub">Safety &amp; SOS</span></h3>
+        <p>Took it from concept to Play Store in two months. Ran sprints in ClickUp and mentored two developers through architecture, code review and testing.</p>
+        <p class="lens"><span>The call</span>Cut scope hard enough to ship a safety app in 8 weeks.</p>
+        <div class="tile-foot"><a class="link" href="https://play.google.com/store/apps/details?id=com.suraksha_app.app&amp;hl=en_IN" target="_blank" rel="noopener">Play Store ↗</a></div>
+      </article>
+
+      <article class="tile">
+        <div class="tile-top"><span class="chip ok">On Play Store</span><span class="chip">0→1 · EV</span></div>
+        <h3>PlusX Electric</h3>
+        <p>Part of the 0→1 launch of an EV app for drivers and consumers: architecture, payments and Maps-based flows, concept to release.</p>
+        <p class="lens"><span>The call</span>Moved a legacy IoT (MQTT) app to Kotlin so later features shipped faster.</p>
+        <div class="tile-foot"><a class="link" href="https://play.google.com/store/apps/details?id=com.shunyaekai.plusexelectric&amp;hl=en_IN" target="_blank" rel="noopener">Play Store ↗</a></div>
+      </article>
+
+      <article class="tile">
+        <div class="tile-top"><span class="chip ok">100K+ downloads</span><span class="chip">Gaming</span></div>
+        <h3>Grand Gaming</h3>
+        <p>Owned analytics instrumentation and Cashfree payments while the app scaled past 100K downloads and started earning.</p>
+        <p class="lens"><span>The call</span>Instrument first, so growth decisions have data behind them.</p>
+        <div class="tile-foot"><a class="link" href="https://play.google.com/store/apps/details?id=com.grandgaming.platform&amp;hl=en_IN" target="_blank" rel="noopener">Play Store ↗</a></div>
+      </article>
+
+      <article class="tile">
+        <div class="tile-top"><span class="chip warn">Side build</span><span class="chip">Fintech · India</span></div>
+        <h3>RupeeFlow</h3>
+        <p>An offline, ad-free rupee expense tracker. It reads bank-statement PDFs and UPI SMS, sorts spends into categories, and keeps a borrow &amp; lend ledger.</p>
+        <p class="lens"><span>The call</span>100% offline. Your bank data never leaves the phone.</p>
+        <div class="tile-foot"><span class="metric">Kotlin · Jetpack Compose · Google AI Studio</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CHANGELOG -->
+<section class="section alt" id="changelog">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Changelog · 2016 → now</p>
+      <h2>Release notes for a career.</h2>
+      <p class="sec-sub">Major versions mark a change in role. Minor versions mark a new team.</p>
+    </header>
+    <ol class="log" id="log"></ol>
+  </div>
+</section>
+
+<!-- TEARDOWNS -->
+<section class="section" id="teardowns">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Teardowns &amp; PRDs · <span id="td-count">10</span></p>
+      <h2>How I take apart products people already love.</h2>
+      <p class="sec-sub">Funnels, AOV, PLG, heuristics and GTM, applied to Zepto, Zomato, Airbnb, Uber and more. Every card opens the full document.</p>
+    </header>
+    <div class="filters" id="td-filters" role="toolbar" aria-label="Filter teardowns"></div>
+    <div class="td-grid" id="td-grid"></div>
+  </div>
+</section>
+
+<!-- PLAYGROUND -->
+<section class="section alt" id="playground">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Playground · come back tomorrow</p>
+      <h2>Make the call yourself.</h2>
+      <p class="sec-sub">A new product decision every day at midnight IST, and a RICE calculator you can break. Your streak stays in this browser.</p>
+    </header>
+
+    <div class="play-grid">
+      <div class="play-card" id="daily">
+        <div class="pc-head">
+          <span class="pc-title">Daily decision <span class="mono" id="d-num"></span></span>
+          <span class="streak" id="d-streak">Streak 0</span>
+        </div>
+        <p class="d-kicker" id="d-kicker">Hypothetical scenario</p>
+        <p class="d-text" id="d-text"></p>
+        <div class="d-facts" id="d-facts"></div>
+        <div class="d-choices" id="d-choices">
+          <button type="button" class="choice" data-c="ship">Ship it</button>
+          <button type="button" class="choice" data-c="iterate">Iterate</button>
+          <button type="button" class="choice" data-c="skip">Skip it</button>
+        </div>
+        <div class="d-reveal" id="d-reveal" hidden>
+          <p class="d-verdict" id="d-verdict"></p>
+          <p class="d-why" id="d-why"></p>
+          <p class="d-frame" id="d-frame"></p>
+        </div>
+        <div class="d-foot">
+          <span id="d-timer" class="mono"></span>
+          <button type="button" class="link-btn" id="d-more">Practice another →</button>
+        </div>
+      </div>
+
+      <div class="play-card" id="rice">
+        <div class="pc-head">
+          <span class="pc-title">RICE lab</span>
+          <span class="chip">OutLoud backlog · sample numbers</span>
+        </div>
+        <p class="r-help">Pick a feature, move the sliders, and watch the roadmap re-rank. Score = Reach × Impact × Confidence ÷ Effort.</p>
+        <ol class="r-list" id="r-list"></ol>
+        <div class="r-controls" id="r-controls">
+          <p class="r-editing">Editing: <b id="r-name"></b></p>
+          <div class="r-row"><label for="r-reach">Reach <small>users / quarter</small></label><input type="range" id="r-reach" min="100" max="10000" step="100"><output id="o-reach"></output></div>
+          <div class="r-row"><label for="r-impact">Impact <small>0.25 → 3</small></label><input type="range" id="r-impact" min="0" max="4" step="1"><output id="o-impact"></output></div>
+          <div class="r-row"><label for="r-conf">Confidence</label><input type="range" id="r-conf" min="20" max="100" step="5"><output id="o-conf"></output></div>
+          <div class="r-row"><label for="r-effort">Effort <small>person-weeks</small></label><input type="range" id="r-effort" min="0.5" max="10" step="0.5"><output id="o-effort"></output></div>
+          <button type="button" class="link-btn" id="r-reset">Reset sample</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLKIT + COMMUNITY -->
+<section class="section" id="toolkit">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Toolkit</p>
+      <h2>PM craft on top of an engineer's stack.</h2>
+    </header>
+    <div class="kit" id="kit"></div>
+
+    <div class="community">
+      <div class="comm-copy">
+        <p class="eyebrow">Teaching in public</p>
+        <h3>I explain product and tech to 100K+ people on YouTube.</h3>
+        <p>On <a class="link" href="https://www.youtube.com/@ITwalebhaiya" target="_blank" rel="noopener">IT Wale Bhaiya</a> I publish PM interview prep, career roadmaps and AI automation tutorials, like n8n workflows for PMs. I'm also a featured contributor on Google's official YouTube Help channel.</p>
+        <p class="stages"><span>Spoken at</span>Kotlin User Group Delhi · GL Bajaj · Galgotias University · Bundelkhand University</p>
+      </div>
+      <dl class="comm-stats">
+        <div><dt>100K+</dt><dd>YouTube subscribers</dd></div>
+        <div><dt>11K+</dt><dd>LinkedIn followers</dd></div>
+        <div><dt>5,000+</dt><dd>people mentored</dd></div>
+      </dl>
+    </div>
+
+    <div class="quotes">
+      <figure>
+        <blockquote>“Sachin brought a rare mix of engineering depth and product thinking to every review. His PRDs were some of the most technically grounded I've seen from someone early in PM.”</blockquote>
+        <figcaption>Senior PM, Airtribe mentor</figcaption>
+      </figure>
+      <figure>
+        <blockquote>“Sachin's ability to translate complex features into clear specs made him invaluable on Dr. Skin AI and Oravue AI.”</blockquote>
+        <figcaption>Manager, IF MedTech</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contact">
+  <div class="wrap">
+    <p class="status"><span class="pulse" aria-hidden="true"></span>Roadmap slot open · v4.0.0 unreleased</p>
+    <h2>Need a PM who can read the code and still put the <mark class="hl">user</mark> first?</h2>
+    <p class="sec-sub">Open to APM and PM roles in Delhi NCR, based in Gurugram. The fastest way to reach me is email.</p>
+    <div class="contact-rows">
+      <div class="c-row"><span class="c-k">Email</span><span class="c-v" id="c-email">sssaxena058@gmail.com</span><button type="button" class="copy" data-copy="sssaxena058@gmail.com">Copy</button></div>
+      <div class="c-row"><span class="c-k">Phone</span><span class="c-v">+91 75260 07604</span><button type="button" class="copy" data-copy="+917526007604">Copy</button></div>
+    </div>
+    <div class="socials">
+      <a class="btn primary" href="https://www.linkedin.com/in/ytsaxena/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn ghost" href="resume.pdf" target="_blank" rel="noopener">Resume (PDF) ↗</a>
+      <a class="btn ghost" href="https://github.com/ytsaxena" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn ghost" href="https://www.youtube.com/@ITwalebhaiya" target="_blank" rel="noopener">YouTube ↗</a>
+      <a class="btn ghost" href="https://www.instagram.com/ytsaxena/" target="_blank" rel="noopener">Instagram ↗</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap foot-in">
+    <span>Gurugram · <span id="clock" class="mono">--:--</span> IST</span>
+    <span>Hand-built in HTML, CSS &amp; JS. No framework.</span>
+    <span>Press <kbd>⌘K</kbd> or type <kbd>ship</kbd></span>
+  </div>
+</footer>
+
+<div class="cmdk" id="cmdk" hidden>
+  <div class="cmdk-scrim" data-close></div>
+  <div class="cmdk-panel" role="dialog" aria-modal="true" aria-label="Command menu">
+    <label class="sr" for="cmdk-input">Search commands</label>
+    <input id="cmdk-input" type="text" placeholder="Type a command or search…" autocomplete="off">
+    <ul id="cmdk-list" role="listbox" aria-label="Commands"></ul>
+    <div class="cmdk-foot"><span>↑↓ move</span><span>↵ run</span><span>esc close</span></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
