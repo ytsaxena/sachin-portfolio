@@ -235,137 +235,6 @@ S.toolkit.forEach((g) => {
   $("#kit").append(d);
 });
 
-/* ---------- Daily decision (resets at midnight IST) ---------- */
-const IST = 5.5 * 36e5, DAY = 864e5;
-const LAUNCH = Math.floor(Date.UTC(2026, 8, 27) / DAY);
-const today = () => Math.floor((Date.now() + IST) / DAY);
-const dayNo = today();
-const todayIdx = ((dayNo % S.scenarios.length) + S.scenarios.length) % S.scenarios.length;
-let dState = store.get("daily", { last: null, streak: 0, picks: {}, played: 0, matched: 0 });
-let practiceIdx = null;
-const VERB = { ship: "Ship it", iterate: "Iterate", skip: "Skip it" };
-
-function streakNow() { return dState.last === dayNo || dState.last === dayNo - 1 ? dState.streak : 0; }
-function renderDaily() {
-  const practicing = practiceIdx !== null;
-  const idx = practicing ? practiceIdx : todayIdx;
-  const sc = S.scenarios[idx];
-  $("#d-num").textContent = practicing ? "· practice" : "#" + String(dayNo - LAUNCH + 1).padStart(3, "0");
-  $("#d-kicker").textContent = practicing ? "Practice round · doesn't touch your streak" : "Hypothetical scenario · today";
-  $("#d-text").textContent = sc.text;
-  $("#d-facts").innerHTML = sc.facts.map(([k, v, dir]) => `<span class="fact ${dir}">${esc(k)} <b>${esc(v)}</b></span>`).join("");
-  const s = streakNow();
-  $("#d-streak").textContent = `Streak ${s} day${s === 1 ? "" : "s"}`;
-  const pick = practicing ? null : dState.picks[dayNo];
-  $$(".choice").forEach((b) => { b.disabled = !!pick; b.className = "choice"; });
-  $("#d-reveal").hidden = true;
-  if (pick) reveal(sc, pick, false);
-  $("#d-more").textContent = practicing ? "Next practice →" : pick ? "Practice another →" : "Skip to practice →";
-}
-function reveal(sc, pick, fresh) {
-  $$(".choice").forEach((b) => {
-    b.disabled = true;
-    if (b.dataset.c === pick) b.classList.add("picked");
-    if (b.dataset.c === sc.answer) b.classList.add("sachin");
-  });
-  const match = pick === sc.answer;
-  $("#d-verdict").innerHTML = match
-    ? `<span class="match">Same call as me.</span> ${VERB[sc.answer]}.`
-    : `<span class="nomatch">We'd disagree.</span> My call: ${VERB[sc.answer]}.`;
-  $("#d-why").textContent = sc.why;
-  const rec = practiceIdx === null && dState.played ? ` · You agree with me ${dState.matched}/${dState.played}` : "";
-  $("#d-frame").textContent = "Lens: " + sc.frame + rec;
-  $("#d-reveal").hidden = false;
-  if (fresh && match) petals(40);
-}
-$$(".choice").forEach((b) => b.addEventListener("click", () => {
-  const pick = b.dataset.c;
-  if (practiceIdx !== null) { reveal(S.scenarios[practiceIdx], pick, true); return; }
-  if (dState.picks[dayNo]) return;
-  dState.streak = dState.last === dayNo - 1 ? dState.streak + 1 : 1;
-  dState.last = dayNo;
-  dState.picks[dayNo] = pick;
-  dState.played++;
-  if (pick === S.scenarios[todayIdx].answer) dState.matched++;
-  store.set("daily", dState);
-  const s = streakNow();
-  $("#d-streak").textContent = `Streak ${s} day${s === 1 ? "" : "s"}`;
-  reveal(S.scenarios[todayIdx], pick, true);
-  $("#d-more").textContent = "Practice another →";
-}));
-$("#d-more").addEventListener("click", () => {
-  let n = practiceIdx === null ? todayIdx : practiceIdx;
-  do { n = (n + 1) % S.scenarios.length; } while (n === todayIdx);
-  practiceIdx = n;
-  renderDaily();
-});
-function tickTimer() {
-  const left = DAY - ((Date.now() + IST) % DAY);
-  const hh = Math.floor(left / 36e5), mm = Math.floor((left % 36e5) / 6e4), ss = Math.floor((left % 6e4) / 1e3);
-  $("#d-timer").textContent = `Next decision in ${hh}h ${String(mm).padStart(2, "0")}m ${String(ss).padStart(2, "0")}s`;
-  if (today() !== dayNo) location.reload();
-}
-renderDaily(); tickTimer(); setInterval(tickTimer, 1000);
-
-/* ---------- RICE lab ---------- */
-const IMPACT = [0.25, 0.5, 1, 2, 3];
-const clone = () => S.rice.map((r) => ({ ...r }));
-let rice = clone(), sel = 0;
-const rList = $("#r-list");
-const score = (r) => (r.reach * r.impact * (r.conf / 100)) / r.effort;
-const rItems = rice.map((r, i) => {
-  const li = el("li", "r-item");
-  li.tabIndex = 0; li.setAttribute("role", "option"); li.dataset.i = i;
-  li.innerHTML = `<span class="r-rank"></span><span class="r-name">${esc(r.name)}<span class="r-bar"><i></i></span></span><span class="r-score"></span>`;
-  const choose = () => { sel = i; syncRice(false); };
-  li.addEventListener("click", choose);
-  li.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choose(); } });
-  return li;
-});
-rList.setAttribute("role", "listbox"); rList.setAttribute("aria-label", "Backlog ranked by RICE score");
-const ctl = { reach: $("#r-reach"), impact: $("#r-impact"), conf: $("#r-conf"), effort: $("#r-effort") };
-function syncControls() {
-  const r = rice[sel];
-  $("#r-name").textContent = r.name;
-  ctl.reach.value = r.reach; ctl.impact.value = IMPACT.indexOf(r.impact); ctl.conf.value = r.conf; ctl.effort.value = r.effort;
-  syncOutputs();
-}
-function syncOutputs() {
-  const r = rice[sel];
-  $("#o-reach").textContent = r.reach.toLocaleString("en-IN");
-  $("#o-impact").textContent = "×" + r.impact;
-  $("#o-conf").textContent = r.conf + "%";
-  $("#o-effort").textContent = r.effort + " wk";
-}
-function syncRice(animate = true) {
-  const first = new Map(rItems.map((li) => [li, li.getBoundingClientRect().top]));
-  const order = rice.map((r, i) => [score(r), i]).sort((a, b) => b[0] - a[0]);
-  const max = order[0][0] || 1;
-  order.forEach(([s, i], rank) => {
-    const li = rItems[i];
-    $(".r-rank", li).textContent = String(rank + 1).padStart(2, "0");
-    $(".r-score", li).textContent = Math.round(s).toLocaleString("en-IN");
-    $(".r-bar i", li).style.width = (s / max) * 100 + "%";
-    li.setAttribute("aria-selected", i === sel);
-    rList.append(li);
-  });
-  if (animate && !reduced) {
-    rItems.forEach((li) => {
-      const d = first.get(li) - li.getBoundingClientRect().top;
-      if (!d) return;
-      li.animate([{ transform: `translateY(${d}px)` }, { transform: "none" }], { duration: 420, easing: "cubic-bezier(.2,.8,.2,1)" });
-    });
-  }
-  syncControls();
-}
-Object.entries(ctl).forEach(([k, input]) => input.addEventListener("input", () => {
-  const v = parseFloat(input.value);
-  rice[sel][k] = k === "impact" ? IMPACT[v] : v;
-  syncOutputs(); syncRice();
-}));
-$("#r-reset").addEventListener("click", () => { rice = clone(); syncRice(); toast("Sample backlog restored"); });
-syncRice(false);
-
 /* ---------- Copy buttons ---------- */
 function copy(text, node) {
   const ok = () => toast("Copied " + text);
@@ -412,10 +281,8 @@ const COMMANDS = [
   { g: "Go to", label: "OutLoud pipeline", hint: "AI trade-offs", run: go("#outloud") },
   { g: "Go to", label: "Changelog", hint: "career", run: go("#changelog") },
   { g: "Go to", label: "Teardowns & PRDs", hint: "10 docs", run: go("#teardowns") },
-  { g: "Go to", label: "Playground", hint: "daily + RICE", run: go("#playground") },
   { g: "Go to", label: "Toolkit & community", run: go("#toolkit") },
   { g: "Go to", label: "Contact", run: go("#contact") },
-  { g: "Do", label: "Play today's decision", hint: "streak", run: () => { practiceIdx = null; renderDaily(); go("#daily")(); } },
   { g: "Do", label: "Copy email address", hint: S.email, run: () => copy(S.email, $("#c-email")) },
   { g: "Do", label: "Switch light / dark theme", run: toggleTheme },
   { g: "Do", label: "Throw marigold petals", hint: "or type ship", run: () => petals(90) },
@@ -433,7 +300,7 @@ function renderCmd() {
   cFiltered = COMMANDS.filter((c) => !q || (c.label + " " + c.g + " " + (c.hint || "")).toLowerCase().includes(q));
   cSel = Math.min(cSel, Math.max(0, cFiltered.length - 1));
   cList.innerHTML = "";
-  if (!cFiltered.length) { cList.append(el("li", "empty", `Nothing matches “${esc(cIn.value)}”. Try “Zepto”, “RICE” or “email”.`)); return; }
+  if (!cFiltered.length) { cList.append(el("li", "empty", `Nothing matches “${esc(cIn.value)}”. Try “Zepto”, “OutLoud” or “email”.`)); return; }
   let g = null;
   cFiltered.forEach((c, i) => {
     if (c.g !== g) { g = c.g; cList.append(el("li", "grp", esc(g))); }
@@ -482,28 +349,17 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-/* ---------- Clock, return visits, nav state ---------- */
+/* ---------- Clock, nav state ---------- */
 const clockFmt = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit" });
 const tickClock = () => ($("#clock").textContent = clockFmt.format(new Date()));
 tickClock(); setInterval(tickClock, 15000);
-
-const visits = store.get("visits", 0) + 1;
-store.set("visits", visits);
-if (visits > 1) {
-  const w = $("#welcome");
-  const played = !!dState.picks[dayNo];
-  w.innerHTML = played
-    ? `Welcome back. Visit #${visits}. You've already made today's call. Streak: ${streakNow()}.`
-    : `Welcome back. Visit #${visits}. <a class="link" href="#daily">Today's decision is waiting ↓</a>`;
-  w.hidden = false;
-}
 
 const navLinks = $$(".nav a");
 if ("IntersectionObserver" in window) {
   const io = new IntersectionObserver((entries) => entries.forEach((en) => {
     if (en.isIntersecting) navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
   }), { rootMargin: "-45% 0px -50% 0px" });
-  ["work", "changelog", "teardowns", "playground", "contact"].forEach((id) => io.observe($("#" + id)));
+  ["work", "changelog", "teardowns", "contact"].forEach((id) => io.observe($("#" + id)));
 }
 
 console.log("%c sachin.pm %c Hey, fellow builder. This site is plain HTML/CSS/JS. Content lives in data.js. Say hi: " + S.email,

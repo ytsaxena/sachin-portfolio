@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sachin Saxena</title>
-<meta name="description" content="Sachin Saxena — Product Manager for mobile & AI products. Ex-Android engineer, builder of OutLoud, teardowns, PRDs and a daily PM puzzle.">
+<meta name="description" content="Sachin Saxena — Product Manager for mobile & AI products. Ex-Android engineer, builder of OutLoud, product teardowns and PRDs.">
 <meta property="og:title" content="Sachin Saxena — Product Manager, Mobile & AI">
-<meta property="og:description" content="Engineer-turned-PM who ships AI products. Ask the portfolio, play the daily PM decision, read the changelog.">
+<meta property="og:description" content="Engineer-turned-PM who ships AI products. Ask the portfolio, read the teardowns, browse the career changelog.">
 <meta name="theme-color" content="#0B0E14">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,6 @@
       <a href="#work">Work</a>
       <a href="#changelog">Changelog</a>
       <a href="#teardowns">Teardowns</a>
-      <a href="#playground">Playground</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="top-actions">
@@ -55,9 +54,8 @@
       <p class="lead">Product Manager for mobile &amp; AI. I wrote Kotlin for three years before I wrote PRDs, so my specs hold up when engineering reads them. Today I lead product and mobile for two AI healthcare apps at IF MedTech. On the side, I built and shipped OutLoud, a voice-first AI speaking coach, on my own.</p>
       <div class="hero-cta">
         <a class="btn primary" href="#work">See the work <span aria-hidden="true">→</span></a>
-        <a class="btn ghost" href="#playground">Play PM for 60 seconds</a>
+        <a class="btn ghost" href="#teardowns">Read the teardowns</a>
       </div>
-      <p class="welcome" id="welcome" hidden></p>
     </div>
 
     <div class="ask" id="ask" role="region" aria-label="Ask my portfolio">
@@ -211,62 +209,8 @@
   </div>
 </section>
 
-<!-- PLAYGROUND -->
-<section class="section alt" id="playground">
-  <div class="wrap">
-    <header class="sec-head">
-      <p class="eyebrow">Playground · come back tomorrow</p>
-      <h2>Make the call yourself.</h2>
-      <p class="sec-sub">A new product decision every day at midnight IST, and a RICE calculator you can break. Your streak stays in this browser.</p>
-    </header>
-
-    <div class="play-grid">
-      <div class="play-card" id="daily">
-        <div class="pc-head">
-          <span class="pc-title">Daily decision <span class="mono" id="d-num"></span></span>
-          <span class="streak" id="d-streak">Streak 0</span>
-        </div>
-        <p class="d-kicker" id="d-kicker">Hypothetical scenario</p>
-        <p class="d-text" id="d-text"></p>
-        <div class="d-facts" id="d-facts"></div>
-        <div class="d-choices" id="d-choices">
-          <button type="button" class="choice" data-c="ship">Ship it</button>
-          <button type="button" class="choice" data-c="iterate">Iterate</button>
-          <button type="button" class="choice" data-c="skip">Skip it</button>
-        </div>
-        <div class="d-reveal" id="d-reveal" hidden>
-          <p class="d-verdict" id="d-verdict"></p>
-          <p class="d-why" id="d-why"></p>
-          <p class="d-frame" id="d-frame"></p>
-        </div>
-        <div class="d-foot">
-          <span id="d-timer" class="mono"></span>
-          <button type="button" class="link-btn" id="d-more">Practice another →</button>
-        </div>
-      </div>
-
-      <div class="play-card" id="rice">
-        <div class="pc-head">
-          <span class="pc-title">RICE lab</span>
-          <span class="chip">OutLoud backlog · sample numbers</span>
-        </div>
-        <p class="r-help">Pick a feature, move the sliders, and watch the roadmap re-rank. Score = Reach × Impact × Confidence ÷ Effort.</p>
-        <ol class="r-list" id="r-list"></ol>
-        <div class="r-controls" id="r-controls">
-          <p class="r-editing">Editing: <b id="r-name"></b></p>
-          <div class="r-row"><label for="r-reach">Reach <small>users / quarter</small></label><input type="range" id="r-reach" min="100" max="10000" step="100"><output id="o-reach"></output></div>
-          <div class="r-row"><label for="r-impact">Impact <small>0.25 → 3</small></label><input type="range" id="r-impact" min="0" max="4" step="1"><output id="o-impact"></output></div>
-          <div class="r-row"><label for="r-conf">Confidence</label><input type="range" id="r-conf" min="20" max="100" step="5"><output id="o-conf"></output></div>
-          <div class="r-row"><label for="r-effort">Effort <small>person-weeks</small></label><input type="range" id="r-effort" min="0.5" max="10" step="0.5"><output id="o-effort"></output></div>
-          <button type="button" class="link-btn" id="r-reset">Reset sample</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- TOOLKIT + COMMUNITY -->
-<section class="section" id="toolkit">
+<section class="section alt" id="toolkit">
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow">Toolkit</p>
