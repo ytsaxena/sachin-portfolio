@@ -152,27 +152,6 @@ function ask(q) {
 }
 askForm.addEventListener("submit", (e) => { e.preventDefault(); ask(askInput.value); askInput.value = ""; });
 
-/* ---------- OutLoud pipeline inspector ---------- */
-const pipe = $("#pipe"), note = $("#pipe-note");
-const NOTES = {
-  none: "One loop of an OutLoud session. Flip the toggles to see two product decisions.",
-  outage: "Gemini goes down, and the interview keeps going on a local question bank. A practice session should never die on a 500 error.",
-  privacy: "Audio is transcribed on the phone and never uploaded. Only the answer text leaves the device.",
-  both: "Worst case, the API is down and the user is on a train: the session still runs, and their voice still never leaves the phone."
-};
-function syncPipe() {
-  const o = pipe.dataset.outage === "true", p = pipe.dataset.privacy === "true";
-  note.textContent = o && p ? NOTES.both : o ? NOTES.outage : p ? NOTES.privacy : NOTES.none;
-}
-[["#t-outage", "outage"], ["#t-privacy", "privacy"]].forEach(([id, key]) => {
-  $(id).addEventListener("click", (e) => {
-    const on = e.currentTarget.getAttribute("aria-pressed") !== "true";
-    e.currentTarget.setAttribute("aria-pressed", on);
-    pipe.dataset[key] = on;
-    syncPipe();
-  });
-});
-
 /* ---------- Tile spotlight ---------- */
 $$(".tile").forEach((t) => t.addEventListener("pointermove", (e) => {
   const b = t.getBoundingClientRect();

@@ -21,7 +21,7 @@ window.SITE = {
     {
       v: "v4.0.0", when: "Unreleased", kind: "next",
       title: "Product Manager on your team",
-      where: "Delhi NCR · open to APM / PM roles",
+      where: "Delhi NCR · open to AI PM / TPM / PM roles",
       notes: [
         ["added", "Engineer-grade PRDs, AI product judgment, and a habit of shipping."],
         ["added", "A 100K-person audience that already trusts how I explain products."]
@@ -134,7 +134,7 @@ window.SITE = {
         a: ["You get a PM who can read the codebase, write the PRD, and talk to the client in the same afternoon.", "I've owned delivery for AI health products, shipped my own AI product solo, and I explain product thinking to 100K+ people on YouTube, so communication is a strength, not a risk."],
         src: "Summary" },
       { keys: ["contact", "email", "reach", "phone", "call", "hire", "connect", "linkedin", "number"],
-        a: ["Email is fastest: sssaxena058@gmail.com. Phone: +91 75260 07604.", "Or find me on LinkedIn at /in/ytsaxena. I'm in Gurugram and open to APM and PM roles across Delhi NCR."],
+        a: ["Email is fastest: sssaxena058@gmail.com. Phone: +91 75260 07604.", "Or find me on LinkedIn at /in/ytsaxena. I'm in Gurugram and open to AI PM, TPM and PM roles across Delhi NCR."],
         src: "Contact" },
       { keys: ["youtube", "community", "teach", "mentor", "content", "speak", "talk", "linkedin followers", "channel"],
         a: ["I run IT Wale Bhaiya on YouTube (100K+ subscribers) and have 11K+ followers on LinkedIn. I post PM interview prep, career roadmaps and n8n automation tutorials for PMs.", "I've mentored 5,000+ developers and students, and spoken at Kotlin User Group Delhi, GL Bajaj, Galgotias and Bundelkhand University."],
@@ -152,7 +152,7 @@ window.SITE = {
         a: ["I instrument before I optimize. At Grand Gaming I owned analytics and payments while the app scaled to 100K+ downloads. At TetraFolia I wired up CleverTap and Adjust so product decisions had data behind them.", "In OutLoud I track session starts, completions and skip rate. Skip rate tells me which questions are too hard."],
         src: "Changelog › v2.0, v2.1 · Work › OutLoud" },
       { keys: ["location", "where", "relocate", "remote", "city", "gurugram", "delhi", "ncr", "based"],
-        a: ["Based in Gurugram and open to APM or PM roles anywhere in Delhi NCR."],
+        a: ["Based in Gurugram and open to AI PM, TPM or PM roles anywhere in Delhi NCR."],
         src: "Contact" },
       { keys: ["education", "degree", "airtribe", "certification", "college", "mca", "study"],
         a: ["AI Product Management certification from Airtribe (16-week cohort, 2025). Before that, an MCA from Bundelkhand University and a B.Sc in Computer Science from DBRAU, Agra."],

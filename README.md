@@ -7,7 +7,7 @@ Personal portfolio of **Sachin Saxena**, Product Manager for mobile & AI product
 ## What's inside
 
 - **Ask my portfolio**: a keyword-retrieval Q&A over the site's content, with streamed answers and source labels. Runs in the browser with no API calls.
-- **OutLoud pipeline inspector**: toggle a simulated Gemini outage or the privacy view to see the product trade-offs behind my AI speaking coach.
+- **OutLoud pipeline**: an animated diagram of one session of my AI speaking coach, showing the fallback and on-device design choices.
 - **Career changelog**: my career as semantic-versioned release notes.
 - **Teardowns & PRDs**: 10 case studies (Zepto, Zomato, Airbnb, Uber, …) with filters.
 - **⌘K command menu**, light/dark themes, and a small easter egg (type `ship`).
