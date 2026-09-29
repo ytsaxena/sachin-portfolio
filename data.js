@@ -105,6 +105,27 @@ window.SITE = {
     { brand: "WhatsApp", kind: "Community strategy", title: "Community growth for data analysts in 14 days", q: "How do you grow an engaged WhatsApp community in two weeks?", tags: ["Growth", "Community"], href: NOTION + "#3b0eed262be580738cecfafbee2c195c" }
   ],
 
+  /* ---------- Sessions (videos on IT Wale Bhaiya) ----------
+     img: a frame from the video. flow: true shows tools as the steps of the workflow. */
+  sessions: [
+    { kind: "n8n workflow", title: "Gmail reply tracker", q: "Finds the sent emails that got a reply and logs them in Google Sheets.",
+      tools: ["Gmail", "JavaScript", "Google Sheets"], flow: true, img: "img/sessions/n8n-gmail-reply-tracker.jpg",
+      alt: "n8n workflow: a manual trigger fetches sent and received Gmail messages, a JavaScript node matches the replies, and the results are appended to a Google Sheet",
+      href: "https://www.youtube.com/watch?v=eTeoCBDXa4o" },
+    { kind: "n8n workflow", title: "AI horoscope by email", q: "Reads a person's details from a Google Sheet, asks Gemini to write their horoscope, and emails it to them.",
+      tools: ["Google Sheets", "Gemini", "Gmail"], flow: true, img: "img/sessions/n8n-ai-horoscope-email.jpg",
+      alt: "n8n workflow: manual trigger, then Get row(s) in sheet, then Message a model with Gemini, then Send a message with Gmail",
+      href: "https://www.youtube.com/watch?v=p2apAxMOuGc" },
+    { kind: "n8n course · 1 hour", title: "n8n for beginners: complete course", q: "A no-code automation course for product managers, taught live in one hour.",
+      tools: ["n8n", "No-code", "Beginners"], img: "img/sessions/n8n-beginner-course.jpg",
+      alt: "Course thumbnail: n8n tutorial 2026, automate in 1 hour, complete beginner course",
+      href: "https://www.youtube.com/watch?v=W7_RNmzrPdI" },
+    { kind: "App growth · ASO", title: "Google Play Store ASO: how apps get millions of downloads", q: "Ranking higher with long-tail keywords, and reaching users on Android stores beyond the Play Store.",
+      tools: ["ASO", "Play Store", "Growth"], img: "img/sessions/play-store-aso.jpg",
+      alt: "Video thumbnail: Google Play Store optimization, how to get millions of downloads",
+      href: "https://www.youtube.com/watch?v=Rnx3D_TOWwo" }
+  ],
+
   /* ---------- Toolkit ---------- */
   toolkit: [
     { group: "Product", items: ["Requirement gathering", "PRDs", "Prioritization", "Roadmaps", "Agile / sprints", "Release planning", "Stakeholder mgmt", "User feedback", "Product analytics"] },
@@ -139,6 +160,9 @@ window.SITE = {
       { keys: ["youtube", "community", "teach", "mentor", "content", "speak", "talk", "linkedin followers", "channel"],
         a: ["I run IT Wale Bhaiya on YouTube (100K+ subscribers) and have 11K+ followers on LinkedIn. I post PM interview prep, career roadmaps and n8n automation tutorials for PMs.", "I've mentored 5,000+ developers and students, and spoken at Kotlin User Group Delhi, GL Bajaj, Galgotias and Bundelkhand University."],
         src: "Teaching in public" },
+      { keys: ["n8n", "automation", "automate", "workflow", "workflows", "aso", "play store", "session", "sessions", "tutorial", "video", "videos"],
+        a: ["I teach hands-on sessions on my YouTube channel. Two n8n workflows: a Gmail reply tracker that logs replies in Google Sheets, and an AI horoscope emailer built on Google Sheets, Gemini and Gmail. There's also a one-hour n8n course for beginners.", "On the growth side, I have a session on Google Play Store ASO: long-tail keywords, and listing on Android stores beyond the Play Store."],
+        src: "Sessions" },
       { keys: ["case", "teardown", "prd", "study", "studies", "zepto", "zomato", "airbnb", "uber", "nykaa"],
         a: ["Ten teardowns and PRDs: AOV growth for Zepto, funnel and retention for Zomato, PLG for Airbnb, pickup UX for Uber, a Nielsen heuristic audit of MyJio, a B2B SaaS learning platform PRD, and more.", "They're all in the Teardowns section, and each card opens the full document."],
         src: "Teardowns" },

@@ -208,6 +208,24 @@ FILTERS.forEach((f) => {
 });
 setFilter(FILTERS.includes(store.get("filter", "All")) ? store.get("filter", "All") : "All");
 
+/* ---------- Sessions ---------- */
+$("#ss-count").textContent = S.sessions.length;
+S.sessions.forEach((v) => {
+  const a = el("a", "ss");
+  a.href = v.href; a.target = "_blank"; a.rel = "noopener";
+  const chips = v.tools.map((t) => `<span class="chip">${esc(t)}</span>`);
+  a.innerHTML = `
+    <span class="ss-shot"><img src="${esc(v.img)}" alt="${esc(v.alt)}" width="960" height="540" loading="lazy"><span class="ss-play" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.8 8Z" fill="currentColor"/></svg></span></span>
+    <span class="ss-body">
+      <span class="ss-kind">${esc(v.kind)}</span>
+      <span class="ss-title">${esc(v.title)}</span>
+      <span class="ss-q">${esc(v.q)}</span>
+      <span class="ss-tags">${chips.join(v.flow ? '<span class="ss-arrow" aria-hidden="true">→</span>' : "")}</span>
+    </span>`;
+  a.setAttribute("aria-label", `${v.title}, ${v.kind} (YouTube video, opens in a new tab)`);
+  $("#ss-grid").append(a);
+});
+
 /* ---------- Toolkit ---------- */
 S.toolkit.forEach((g) => {
   const d = el("div", "kit-group", `<h3>${esc(g.group)}</h3><ul>${g.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>`);
@@ -260,6 +278,7 @@ const COMMANDS = [
   { g: "Go to", label: "OutLoud pipeline", hint: "AI trade-offs", run: go("#outloud") },
   { g: "Go to", label: "Changelog", hint: "career", run: go("#changelog") },
   { g: "Go to", label: "Teardowns & PRDs", hint: "10 docs", run: go("#teardowns") },
+  { g: "Go to", label: "Sessions", hint: "n8n + ASO videos", run: go("#sessions") },
   { g: "Go to", label: "Toolkit & community", run: go("#toolkit") },
   { g: "Go to", label: "Contact", run: go("#contact") },
   { g: "Do", label: "Copy email address", hint: S.email, run: () => copy(S.email, $("#c-email")) },
@@ -271,7 +290,8 @@ const COMMANDS = [
   { g: "Open", label: "Resume (PDF)", href: S.links.resume },
   { g: "Open", label: "GitHub", href: S.links.github },
   { g: "Open", label: "YouTube · IT Wale Bhaiya", href: S.links.youtube },
-  ...S.teardowns.map((d) => ({ g: "Teardowns", label: `${d.brand}: ${d.title}`, href: d.href }))
+  ...S.teardowns.map((d) => ({ g: "Teardowns", label: `${d.brand}: ${d.title}`, href: d.href })),
+  ...S.sessions.map((v) => ({ g: "Sessions", label: v.title, hint: v.kind, href: v.href }))
 ];
 let cFiltered = [], cSel = 0, lastFocus = null;
 function renderCmd() {
@@ -338,7 +358,7 @@ if ("IntersectionObserver" in window) {
   const io = new IntersectionObserver((entries) => entries.forEach((en) => {
     if (en.isIntersecting) navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
   }), { rootMargin: "-45% 0px -50% 0px" });
-  ["work", "changelog", "teardowns", "contact"].forEach((id) => io.observe($("#" + id)));
+  ["work", "changelog", "teardowns", "sessions", "contact"].forEach((id) => io.observe($("#" + id)));
 }
 
 console.log("%c sachin.pm %c Hey, fellow builder. This site is plain HTML/CSS/JS. Content lives in data.js. Say hi: " + S.email,
