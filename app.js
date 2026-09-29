@@ -39,12 +39,40 @@ function toggleTheme() {
 }
 $("#theme-toggle").addEventListener("click", toggleTheme);
 
-/* ---------- Hero field: dots that pay "attention" to the cursor ---------- */
+/* ---------- Hero field: an attention map ----------
+   The cursor is the query and the dots are tokens: nearby dots light up and link to it.
+   Asking a question makes the field focus on the Ask panel while the answer streams.
+   Lines never cross the hero text, so the copy stays readable. */
 const field = (() => {
   const c = $("#field"), ctx = c.getContext("2d");
-  const hero = $(".hero");
+  const hero = $(".hero"), panel = $("#ask");
   let w, h, dpr, dots = [], mouse = null, t = 0, running = false, dotRGB = "150,160,190", acc = "#FFB547";
+  let keepOut = [], box = null, picks = [], heat = 0, thinking = false, thinkStart = 0, releaseAt = 0;
   const GAP = 30, R = 170;
+  function rel(node, pad) {
+    const hb = hero.getBoundingClientRect(), b = node.getBoundingClientRect();
+    return { l: b.left - hb.left - pad, t: b.top - hb.top - pad, r: b.right - hb.left + pad, b: b.bottom - hb.top + pad };
+  }
+  const inside = (x, y, q) => x > q.l && x < q.r && y > q.t && y < q.b;
+  // Liang–Barsky clip test: does the segment cross rect q?
+  function crosses(x1, y1, x2, y2, q) {
+    const dx = x2 - x1, dy = y2 - y1;
+    let t0 = 0, t1 = 1;
+    for (const [p, v] of [[-dx, x1 - q.l], [dx, q.r - x1], [-dy, y1 - q.t], [dy, q.b - y1]]) {
+      if (p === 0) { if (v < 0) return false; continue; }
+      const r = v / p;
+      if (p < 0) { if (r > t1) return false; if (r > t0) t0 = r; }
+      else { if (r < t0) return false; if (r < t1) t1 = r; }
+    }
+    return true;
+  }
+  const clear = (x1, y1, x2, y2) => !keepOut.some((q) => crosses(x1, y1, x2, y2, q));
+  function measure() {
+    if (!w) return;
+    keepOut = [...$$(".hero-copy > *"), $(".stats"), $(".field-note")].filter((n) => n && n.offsetParent).map((n) => rel(n, 10));
+    box = rel(panel, 0);
+    for (const d of dots) { d.ko = keepOut.some((q) => inside(d.x, d.y, q)); d.under = inside(d.x, d.y, box); }
+  }
   function readColors() { dotRGB = cssVar("--dot") || dotRGB; acc = cssVar("--accent") || acc; if (!running) draw(); }
   function size() {
     dpr = Math.min(devicePixelRatio || 1, 2);
@@ -53,27 +81,46 @@ const field = (() => {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     dots = [];
     for (let y = GAP / 2; y < h; y += GAP) for (let x = GAP / 2; x < w; x += GAP) dots.push({ x, y, j: Math.random() * 6.28 });
+    measure();
     draw();
   }
-  function focusPoint() {
-    if (mouse) return mouse;
-    // idle: a slow drifting "phantom cursor" so the field is alive on touch screens
-    return { x: w * (0.72 + 0.18 * Math.sin(t * 0.00035)), y: h * (0.42 + 0.25 * Math.sin(t * 0.00052 + 1)) };
+  function orbit() {
+    // idle: a phantom cursor circles the Ask panel, so the field stays alive on touch screens
+    const m = 26, L = box.l - m, T = box.t - m, pw = box.r - box.l + 2 * m, ph = box.b - box.t + 2 * m;
+    let s = (t * 0.035) % (2 * (pw + ph));
+    if (s < pw) return { x: L + s, y: T }; s -= pw;
+    if (s < ph) return { x: L + pw, y: T + s }; s -= ph;
+    if (s < pw) return { x: L + pw - s, y: T + ph }; s -= pw;
+    return { x: L, y: T + ph - s };
   }
+  const edge = (d) => ({ x: Math.min(box.r, Math.max(box.l, d.x)), y: Math.min(box.b, Math.max(box.t, d.y)) });
+  // A question arrived: score the dots around the panel (favoring ~110px away, plus noise) and start attending.
+  function focus() {
+    if (reduced || !box) return;
+    picks = dots.filter((d) => !d.ko && !d.under).map((d) => {
+      const e = edge(d), dist = Math.hypot(d.x - e.x, d.y - e.y);
+      return { d, e, dist, s: Math.exp(-(((dist - 110) / 75) ** 2)) * (0.5 + Math.random()), off: Math.random() };
+    }).filter((p) => p.dist > 20 && p.dist < 300 && clear(p.d.x, p.d.y, p.e.x, p.e.y)).sort((a, b) => b.s - a.s).slice(0, 36);
+    thinking = true; thinkStart = performance.now(); releaseAt = Infinity;
+    panel.classList.add("thinking");
+  }
+  // The answer finished: let the focus fade, but keep it on screen long enough to read as intentional.
+  function release() { releaseAt = Math.max(performance.now(), thinkStart + 1600); }
   function draw() {
     if (!w) return;
+    if (thinking && t > releaseAt) { thinking = false; panel.classList.remove("thinking"); }
+    heat += ((thinking ? 1 : 0) - heat) * 0.07;
     ctx.clearRect(0, 0, w, h);
-    const f = focusPoint();
+    const f = mouse || orbit(), calm = 1 - heat * 0.6;
     const near = [];
     for (const d of dots) {
-      const dx = d.x - f.x, dy = d.y - f.y, dist = Math.hypot(dx, dy);
-      const k = Math.max(0, 1 - dist / R);
+      const k = d.ko || d.under ? 0 : Math.max(0, 1 - Math.hypot(d.x - f.x, d.y - f.y) / R) * calm;
       const twinkle = 0.5 + 0.5 * Math.sin(t * 0.0012 + d.j);
       const a = 0.10 + 0.08 * twinkle + k * 0.75;
       const r = 1 + k * 2.2;
       ctx.fillStyle = `rgba(${dotRGB},${a.toFixed(3)})`;
       ctx.beginPath(); ctx.arc(d.x, d.y, r, 0, 6.283); ctx.fill();
-      if (k > 0.25) near.push([k, d]);
+      if (k > 0.25 && clear(f.x, f.y, d.x, d.y)) near.push([k, d]);
     }
     near.sort((a, b) => b[0] - a[0]);
     ctx.lineWidth = 1;
@@ -83,12 +130,30 @@ const field = (() => {
       ctx.fillStyle = acc; ctx.globalAlpha = Math.min(1, k * 1.1);
       ctx.beginPath(); ctx.arc(d.x, d.y, 1.4 + k * 2.2, 0, 6.283); ctx.fill();
     }
+    if (heat > 0.01) {
+      // attention sharpens over ~1.4s: a softmax-like temperature drops, so weight concentrates on the top dots
+      const el = t - thinkStart, tau = 2.5 + 11.5 * Math.max(0, 1 - el / 1400);
+      picks.forEach((p, i) => {
+        const wg = Math.exp(-i / tau), a = heat * wg;
+        if (a < 0.02) return;
+        ctx.strokeStyle = acc; ctx.globalAlpha = a * 0.75;
+        ctx.beginPath(); ctx.moveTo(p.d.x, p.d.y); ctx.lineTo(p.e.x, p.e.y); ctx.stroke();
+        ctx.fillStyle = acc; ctx.globalAlpha = Math.min(1, a * 1.2);
+        ctx.beginPath(); ctx.arc(p.d.x, p.d.y, 1.3 + wg * 2.2, 0, 6.283); ctx.fill();
+        if (wg > 0.15) {
+          // values flow into the panel
+          const u = (el / 850 + p.off) % 1;
+          ctx.beginPath(); ctx.arc(p.d.x + (p.e.x - p.d.x) * u, p.d.y + (p.e.y - p.d.y) * u, 1.2 + wg, 0, 6.283); ctx.fill();
+        }
+      });
+    }
     ctx.globalAlpha = 1;
   }
   function loop(now) { if (!running) return; t = now; draw(); requestAnimationFrame(loop); }
   hero.addEventListener("pointermove", (e) => { const b = hero.getBoundingClientRect(); mouse = { x: e.clientX - b.left, y: e.clientY - b.top }; if (reduced) draw(); });
   hero.addEventListener("pointerleave", () => { mouse = null; if (reduced) draw(); });
   new ResizeObserver(size).observe(hero);
+  document.fonts?.ready.then(() => { measure(); draw(); });
   if (!reduced && "IntersectionObserver" in window) {
     new IntersectionObserver(([e]) => {
       if (e.isIntersecting && !running) { running = true; requestAnimationFrame(loop); }
@@ -96,7 +161,7 @@ const field = (() => {
     }).observe(hero);
   }
   readColors();
-  return { readColors };
+  return { readColors, focus, release };
 })();
 matchMedia("(prefers-color-scheme: light)").addEventListener?.("change", () => field.readColors());
 
@@ -126,6 +191,7 @@ function finishStreaming() { if (streaming) { streaming.finish(); streaming = nu
 function ask(q) {
   q = q.trim(); if (!q) return;
   finishStreaming();
+  field.focus();
   askLog.append(el("div", "msg q", esc(q)));
   const hit = retrieve(q);
   const paras = hit ? hit.a : S.ask.fallback;
@@ -137,7 +203,7 @@ function ask(q) {
   ps.forEach((p) => a.append(p));
   const caret = el("span", "caret");
   let pi = 0, ci = 0, timer;
-  const done = () => { clearInterval(timer); ps.forEach((p, i) => (p.textContent = paras[i])); caret.remove(); a.append(src); askLog.scrollTop = askLog.scrollHeight; };
+  const done = () => { clearInterval(timer); ps.forEach((p, i) => (p.textContent = paras[i])); caret.remove(); a.append(src); askLog.scrollTop = askLog.scrollHeight; field.release(); };
   streaming = { finish: done };
   if (reduced) { done(); streaming = null; return; }
   setTimeout(() => {
