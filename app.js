@@ -159,6 +159,30 @@ $$(".tile").forEach((t) => t.addEventListener("pointermove", (e) => {
   t.style.setProperty("--my", e.clientY - b.top + "px");
 }));
 
+/* ---------- OutLoud funnel ---------- */
+(() => {
+  const list = $("#funnel"), steps = S.outloudFunnel, top = steps[0][1];
+  let worst = 1;
+  steps.forEach(([, n], i) => { if (i && steps[i - 1][1] - n > steps[worst - 1][1] - steps[worst][1]) worst = i; });
+  steps.forEach(([label, n], i) => {
+    const prev = i ? steps[i - 1][1] : null;
+    const li = el("li", i === worst ? "leak" : null);
+    li.tabIndex = 0;
+    li.innerHTML = `
+      <span class="f-label">${esc(label)}</span>
+      <span class="f-track">
+        <span class="f-bar" style="width:calc((100% - 150px) * ${n / top})" aria-hidden="true"></span>
+        <span class="f-val">${n} users</span>
+        ${prev ? `<span class="f-drop">−${prev - n}</span>` : ""}
+      </span>
+      ${prev ? `<span class="f-tip">${Math.round((n / prev) * 100)}% of the previous step · ${Math.round((n / top) * 100)}% of starts</span>` : ""}`;
+    list.append(li);
+  });
+  if (reduced || !("IntersectionObserver" in window)) { list.classList.add("in"); return; }
+  const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { list.classList.add("in"); io.disconnect(); } }, { threshold: 0.4 });
+  io.observe(list);
+})();
+
 /* ---------- Changelog ---------- */
 const LABEL = { added: "Added", shipped: "Shipped", changed: "Changed" };
 S.changelog.forEach((r) => {
@@ -275,7 +299,7 @@ const cmdk = $("#cmdk"), cIn = $("#cmdk-input"), cList = $("#cmdk-list");
 const go = (id) => () => $(id).scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
 const COMMANDS = [
   { g: "Go to", label: "Work", hint: "6 products", run: go("#work") },
-  { g: "Go to", label: "OutLoud pipeline", hint: "AI trade-offs", run: go("#outloud") },
+  { g: "Go to", label: "OutLoud case study", hint: "research → prompt → funnel", run: go("#case") },
   { g: "Go to", label: "Changelog", hint: "career", run: go("#changelog") },
   { g: "Go to", label: "Teardowns & PRDs", hint: "10 docs", run: go("#teardowns") },
   { g: "Go to", label: "Sessions", hint: "n8n + ASO videos", run: go("#sessions") },
@@ -348,6 +372,9 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+/* ---------- Show Ctrl K instead of ⌘K off Apple devices ---------- */
+if (!/Mac|iPhone|iPad/i.test(navigator.userAgentData?.platform || navigator.platform || navigator.userAgent)) $$(".mod-k").forEach((k) => (k.textContent = "Ctrl K"));
+
 /* ---------- Clock, nav state ---------- */
 const clockFmt = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit" });
 const tickClock = () => ($("#clock").textContent = clockFmt.format(new Date()));
@@ -358,7 +385,7 @@ if ("IntersectionObserver" in window) {
   const io = new IntersectionObserver((entries) => entries.forEach((en) => {
     if (en.isIntersecting) navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
   }), { rootMargin: "-45% 0px -50% 0px" });
-  ["work", "changelog", "teardowns", "sessions", "contact"].forEach((id) => io.observe($("#" + id)));
+  ["work", "case", "changelog", "teardowns", "sessions", "contact"].forEach((id) => io.observe($("#" + id)));
 }
 
 console.log("%c sachin.pm %c Hey, fellow builder. This site is plain HTML/CSS/JS. Content lives in data.js. Say hi: " + S.email,

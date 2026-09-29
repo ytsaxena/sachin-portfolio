@@ -16,6 +16,15 @@ window.SITE = {
     resume: "resume.pdf"
   },
 
+  /* ---------- OutLoud funnel: users reaching each step (GA4, live product) ---------- */
+  outloudFunnel: [
+    ["Start a session", 60],
+    ["Resolve mic permission", 21],
+    ["Begin speaking", 20],
+    ["Finish an answer", 17],
+    ["Complete a session", 14]
+  ],
+
   /* ---------- Changelog (newest first) ---------- */
   changelog: [
     {
@@ -137,14 +146,23 @@ window.SITE = {
   /* ---------- "Ask my portfolio" knowledge base ----------
      keys: words that trigger the answer. a: paragraphs. src: shown as the retrieval source. */
   ask: {
-    chips: ["What AI have you shipped?", "Why engineer → PM?", "How do you prioritize?", "Why should we hire you?", "How can I reach you?"],
+    chips: ["What AI have you shipped?", "What did OutLoud's data show?", "How do you run delivery?", "Why engineer → PM?", "Why should we hire you?"],
     kb: [
       { keys: ["ai", "shipped", "built", "llm", "gemini", "model", "genai", "artificial"],
-        a: ["Three AI products so far.", "OutLoud, which I built solo: a voice-first English speaking coach. On-device speech-to-text, Gemini for the interview with a local fallback, Sarvam's Bulbul v3 for the voice.", "At IF MedTech I own requirement-to-release for Dr. Skin AI and Oravue AI, two AI healthcare apps."],
+        a: ["Three AI products so far.", "OutLoud, which I built solo: a voice-first English speaking coach. Browser speech-to-text, Gemini for the interview with a local fallback, Sarvam's Bulbul v3 for the voice.", "At IF MedTech I own requirement-to-release for Dr. Skin AI and Oravue AI, two AI healthcare apps."],
         src: "Work › OutLoud, IF MedTech" },
       { keys: ["outloud", "speaking", "voice", "english", "coach", "sarvam", "bulbul"],
-        a: ["OutLoud is for people who read and write English well but freeze when they speak it. Three spoken questions, one AI interviewer, one honest scorecard.", "The key trade-offs: on-device STT for zero latency, a local question bank so a Gemini outage never kills a session, and audio that never leaves the phone. Only the answer text goes to the model."],
+        a: ["OutLoud is for people who read and write English well but freeze when they speak it. Three spoken questions, one AI interviewer, one honest scorecard.", "The key trade-offs: browser speech-to-text, so there's no audio pipeline to build or pay for; a local question bank so a Gemini outage never kills a session; and OutLoud never records or stores audio. Only the answer text goes to the model."],
         src: "Work › OutLoud" },
+      { keys: ["outloud", "research", "users", "survey", "surveyed", "interview", "interviews", "funnel", "data", "traction", "ga4", "activation", "learn", "learned", "results"],
+        a: ["Before building OutLoud I surveyed 33 people. 27+ wanted to practise with an AI, and 15+ had quit past attempts from inconsistency, not cost.", "In the live product GA4 tracked 60 users. The biggest drop was the mic permission prompt, 60 to 21, before any AI ran. Of the people who got past it, two in three finished a full session. Activation is 33% and AI reliability is 84%."],
+        src: "Case study › OutLoud" },
+      { keys: ["prompt", "prompts", "guardrail", "guardrails", "eval", "evals", "evaluation", "evaluate", "output", "outputs", "hallucination", "safety", "responsible", "quality", "reliability", "cost", "latency"],
+        a: ["In OutLoud the prompt is the spec. Its rules are product decisions: never mention accent, judge ideas not grammar, name a win first, give exactly one fix, and never score below 40, because one harsh comment can make this user quit.", "I design for cost and failure too: two model calls per session instead of one per question, a fallback for every AI call, and reliability tracked as a metric. 84% of sessions were scored by the real model."],
+        src: "Case study › OutLoud" },
+      { keys: ["tpm", "program", "delivery", "release", "releases", "stakeholder", "stakeholders", "sprint", "sprints", "execution", "work with", "cross-functional", "qa", "dependencies", "launch", "run"],
+        a: ["At IF MedTech I own requirement-to-release for two AI health apps: turning client and user needs into sprint scope across engineering, QA and design, and clearing requirement ambiguity before it blocks a sprint.", "Before Play Store submission I write the release and compliance docs, which cut the back-and-forth between engineering and compliance. On Suraksha I ran sprints in ClickUp and took it from concept to Play Store in 8 weeks."],
+        src: "Experience › IF MedTech · Work › Suraksha" },
       { keys: ["engineer", "transition", "switch", "why pm", "developer", "background", "technical", "career"],
         a: ["I spent about three years shipping Android apps: an EV platform, a gaming app that passed 100K downloads, IoT migrations.", "I kept caring more about why we were building something than how. Now the engineering background is my edge: my PRDs are technically grounded, and I can spot a scope trap in sprint planning before it costs a week."],
         src: "Changelog › v1.0 → v3.0" },
@@ -181,8 +199,8 @@ window.SITE = {
       { keys: ["education", "degree", "airtribe", "certification", "college", "mca", "study"],
         a: ["AI Product Management certification from Airtribe (16-week cohort, 2025). Before that, an MCA from Bundelkhand University and a B.Sc in Computer Science from DBRAU, Agra."],
         src: "Changelog › v0.0.1, v2.2" },
-      { keys: ["fail", "mistake", "outage", "fallback", "risk", "privacy"],
-        a: ["I design for failure up front. In OutLoud, if the Gemini API fails, the interview falls back to a local question bank, so a practice session never dies on a 500.", "Privacy is a default, not a setting: audio is transcribed on the device and never uploaded."],
+      { keys: ["fail", "failure", "failed", "mistake", "outage", "fallback", "risk", "privacy"],
+        a: ["I design for failure up front. In OutLoud, if the Gemini API fails, the interview falls back to a local question bank, so a practice session never dies on a 500.", "Privacy is a default, not a setting: OutLoud never records or stores audio, and only the transcript text goes to the model."],
         src: "Work › OutLoud" },
       { keys: ["hello", "hi", "hey", "who", "about", "yourself", "intro", "sachin"],
         a: ["Hi, I'm Sachin. I'm a Product Manager for mobile and AI products, and a former Android engineer. I've shipped EV, gaming, safety and AI health apps, built an AI speaking coach solo, and I teach product to 100K+ people on YouTube."],

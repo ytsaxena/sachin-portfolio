@@ -3,11 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sachin Saxena</title>
-<meta name="description" content="Sachin Saxena — Product Manager for mobile & AI products. Ex-Android engineer, builder of OutLoud, product teardowns and PRDs.">
-<meta property="og:title" content="Sachin Saxena — Product Manager, Mobile & AI">
-<meta property="og:description" content="Engineer-turned-PM who ships AI products. Ask the portfolio, read the teardowns, browse the career changelog.">
+<title>Sachin Saxena · AI Product Manager</title>
+<meta name="description" content="Sachin Saxena, AI Product Manager and former Android engineer. Owns two AI health apps at IF MedTech and built OutLoud, a voice AI speaking coach, solo. Open to AI PM, TPM and PM roles in Delhi NCR.">
+<link rel="canonical" href="https://sachin-portfolio-nine-theta.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sachin-portfolio-nine-theta.vercel.app/">
+<meta property="og:title" content="Sachin Saxena · AI Product Manager">
+<meta property="og:description" content="Engineer-turned-PM who ships AI products. Read the OutLoud case study, the teardowns, and the career changelog.">
+<meta property="og:image" content="https://sachin-portfolio-nine-theta.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sachin Saxena, AI Product Manager: I turn fuzzy problems into shipped AI products.">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0B0E14">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Sachin Saxena","jobTitle":"Product Manager","url":"https://sachin-portfolio-nine-theta.vercel.app/","email":"mailto:sssaxena058@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Gurugram","addressCountry":"IN"},"sameAs":["https://www.linkedin.com/in/ytsaxena/","https://github.com/ytsaxena","https://www.youtube.com/@ITwalebhaiya"]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -26,14 +39,16 @@
     </a>
     <nav class="nav" aria-label="Sections">
       <a href="#work">Work</a>
+      <a href="#case">Case study</a>
       <a href="#changelog">Changelog</a>
       <a href="#teardowns">Teardowns</a>
       <a href="#sessions">Sessions</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="top-actions">
-      <button class="kbd-btn" id="cmdk-open" type="button" aria-label="Open command menu">
-        <span class="kbd-label">Jump to…</span><kbd>⌘K</kbd>
+      <button class="kbd-btn" id="cmdk-open" type="button" aria-label="Open menu">
+        <svg class="i-menu" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+        <span class="kbd-label">Jump to…</span><span class="menu-label">Menu</span><kbd class="mod-k">⌘K</kbd>
       </button>
       <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch color theme">
         <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -83,8 +98,8 @@
       <div><dt>~4 yrs</dt><dd>building mobile &amp; AI products</dd></div>
       <div><dt>2</dt><dd>AI health products owned at IF MedTech</dd></div>
       <div><dt>3</dt><dd>0→1 launches: PlusX, Suraksha, OutLoud</dd></div>
+      <div><dt>33</dt><dd>people surveyed &amp; interviewed before OutLoud</dd></div>
       <div><dt>100K+</dt><dd>subscribers on my YouTube channel</dd></div>
-      <div><dt>5,000+</dt><dd>developers &amp; students mentored</dd></div>
     </dl>
   </div>
 </section>
@@ -120,8 +135,8 @@
           </div>
           <div class="wire" aria-hidden="true"></div>
           <div class="stage device">
-            <span class="stage-label">3 · Answer <em>on device</em></span>
-            <div class="node n-audio">Mic → speech-to-text<small>zero-latency, audio stays</small></div>
+            <span class="stage-label">3 · Answer <em>in the browser</em></span>
+            <div class="node n-audio">Mic → speech-to-text<small>live transcript, audio never stored</small></div>
           </div>
           <div class="wire w-text" aria-hidden="true"><span>text only</span></div>
           <div class="stage">
@@ -130,13 +145,14 @@
           </div>
         </div>
         <div class="tile-foot">
+          <a class="btn primary sm" href="#case">Read the case study <span aria-hidden="true">↓</span></a>
           <a class="link" href="https://out-loud-mu.vercel.app/" target="_blank" rel="noopener">Try it live ↗</a>
           <a class="link" href="https://github.com/ytsaxena/OutLoud" target="_blank" rel="noopener">Source ↗</a>
-          <span class="metric">Tracks session starts, completions, skip rate</span>
+          <span class="metric">60 real users · 84% AI reliability · GA4 funnel</span>
         </div>
       </article>
 
-      <article class="tile">
+      <article class="tile tile-wide">
         <div class="tile-top"><span class="chip">IF MedTech · 2025–now</span><span class="chip">AI · Health</span></div>
         <h3>Dr. Skin AI &amp; Oravue AI</h3>
         <p>Own requirement-to-release for two AI healthcare apps, turning client and user needs into sprint scope across engineering, QA and design. I'm the client's main point of contact.</p>
@@ -173,14 +189,121 @@
         <h3>RupeeFlow</h3>
         <p>An offline, ad-free rupee expense tracker. It reads bank-statement PDFs and UPI SMS, sorts spends into categories, and keeps a borrow &amp; lend ledger.</p>
         <p class="lens"><span>The call</span>100% offline. Your bank data never leaves the phone.</p>
-        <div class="tile-foot"><span class="metric">Kotlin · Jetpack Compose · Google AI Studio</span></div>
+        <div class="tile-foot"><a class="link" href="https://github.com/ytsaxena/rupeeflow" target="_blank" rel="noopener">Source ↗</a><span class="metric">Kotlin · Jetpack Compose · Google AI Studio</span></div>
       </article>
     </div>
   </div>
 </section>
 
+<!-- CASE STUDY: OutLoud -->
+<section class="section alt" id="case">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Case study · OutLoud</p>
+      <h2>From a 33&#8209;person survey to 60 real users.</h2>
+      <p class="sec-sub">My Airtribe capstone, run like a real launch: research first, the prompt as the spec, and a funnel read without spin.</p>
+    </header>
+
+    <div class="cs">
+      <div class="cs-row">
+        <div class="cs-side"><span class="cs-n">01</span><h3>The problem</h3></div>
+        <div class="cs-main">
+          <p class="cs-lead">They can write it. They can't say it. Job seekers and early-career workers who read and write English well have no affordable, private, daily way to practise speaking it. Coaching is expensive and public, apps teach grammar, and free content is passive.</p>
+          <dl class="cs-stats">
+            <div><dt>27+</dt><dd>of 33 surveyed want to practise with an AI</dd></div>
+            <div><dt>15+</dt><dd>of 33 quit past attempts from inconsistency, not cost</dd></div>
+            <div><dt>7+</dt><dd>of 33 name being judged as their single biggest fear</dd></div>
+          </dl>
+          <p class="cs-note">Survey and interviews, n=33: 18 working professionals, 14 active job seekers, 1 student.</p>
+        </div>
+      </div>
+
+      <div class="cs-row">
+        <div class="cs-side"><span class="cs-n">02</span><h3>Insight → decision</h3></div>
+        <div class="cs-main">
+          <ul class="cs-map">
+            <li>
+              <p class="cs-quote">“Log judge karenge.”</p>
+              <p><b>Being watched is the barrier, not vocabulary.</b></p>
+              <p class="cs-do"><span>So</span>Voice-only and private. The AI never mentions accent, and no score goes below 40.</p>
+            </li>
+            <li>
+              <p class="cs-quote">“Answer pata hone ke bawajood bol nahi paata.”</p>
+              <p><b>The words exist. They just don't come out.</b></p>
+              <p class="cs-do"><span>So</span>Three questions that ramp: an easy win, a real story, then an opinion. Feedback ends with a “say it better” rewrite you can hear.</p>
+            </li>
+            <li>
+              <p class="cs-quote">“Consistency maintain nahi hui.”</p>
+              <p><b>Motivation isn't what fails. Consistency is.</b></p>
+              <p class="cs-do"><span>So</span>Four-to-five-minute sessions, a streak tracker, score trend and session history built to bring people back.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cs-row">
+        <div class="cs-side"><span class="cs-n">03</span><h3>The prompt is the spec</h3></div>
+        <div class="cs-main cs-split">
+          <figure class="prompt-card">
+            <figcaption>System prompt · question generation</figcaption>
+<pre><code>You are Priya, a warm Indian HR manager running a practice interview for someone who reads English well but is scared to SPEAK it.
+
+Absolute rules:
+<mark>- Never mention accent or pronunciation.</mark>
+- Judge ideas and clarity, not grammar.
+- Name something they did well first.
+- Give exactly ONE thing to improve.
+<mark>- Never score below 40.</mark> One bad comment away from this person quitting.</code></pre>
+          </figure>
+          <ul class="cs-calls">
+            <li><b>Two model calls per session, not one per question.</b> Questions are generated once up front and scored once at the end, which keeps cost and wait time flat.</li>
+            <li><b>Every AI call has a fallback.</b> A local question bank if Gemini fails, the browser's own voice if Sarvam fails. A session never dies on a 500.</li>
+            <li><b>Only text reaches the model.</b> The browser's speech engine returns a transcript. OutLoud never records or stores audio, and Gemini only ever sees the words.</li>
+            <li><b>Reliability is a tracked metric.</b> 84% of sessions were scored by the real model rather than the fallback.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cs-row">
+        <div class="cs-side"><span class="cs-n">04</span><h3>What the data says</h3></div>
+        <div class="cs-main">
+          <figure class="funnel-fig">
+            <figcaption>Users reaching each step · GA4, live product</figcaption>
+            <ol class="funnel" id="funnel"></ol>
+          </figure>
+          <p class="cs-callout"><b>The biggest leak happens before any AI runs.</b> 39 of 60 users never got past the mic permission prompt. Of the 21 who did, 14 finished a full session. That's two in three, so the core loop works once people are in.</p>
+          <dl class="cs-stats three">
+            <div><dt>33%</dt><dd>activation: session starters who speak</dd></div>
+            <div><dt>84%</dt><dd>AI reliability: real model vs. fallback</dd></div>
+            <div><dt class="pending">Pending</dt><dd>North Star, week-4 completion (target 40%). Needs a clean 28-day cohort. Not computed, not guessed.</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="cs-row">
+        <div class="cs-side"><span class="cs-n">05</span><h3>Go-to-market &amp; next</h3></div>
+        <div class="cs-main">
+          <p class="cs-lead">Distribution was hands-on: WhatsApp communities, one-to-one outreach and LinkedIn. Every user who tried it got a personal follow-up 3–4 days later, and every non-return became another research conversation.</p>
+          <ul class="cs-next">
+            <li><b>Reminder notification</b><span>targets the Day-2 drop-off</span></li>
+            <li><b>Live conversation</b><span>real back-and-forth, capped length</span></li>
+            <li><b>Skill tracking</b><span>growth per dimension, not one score</span></li>
+            <li><b>Cross-device sync</b><span>no lost streaks</span></li>
+            <li><b>Streak badges</b><span>opt-in D7, D15 milestones, never scores</span></li>
+            <li><b>Resume-based questions</b><span>personalised practice</span></li>
+          </ul>
+          <div class="cs-foot">
+            <a class="btn primary" href="https://out-loud-mu.vercel.app/" target="_blank" rel="noopener">Try OutLoud ↗</a>
+            <a class="btn ghost" href="https://github.com/ytsaxena/OutLoud" target="_blank" rel="noopener">Read the source ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CHANGELOG -->
-<section class="section alt" id="changelog">
+<section class="section" id="changelog">
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow">Changelog · 2016 → now</p>
@@ -192,7 +315,7 @@
 </section>
 
 <!-- TEARDOWNS -->
-<section class="section" id="teardowns">
+<section class="section alt" id="teardowns">
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow">Teardowns &amp; PRDs · <span id="td-count">10</span></p>
@@ -205,7 +328,7 @@
 </section>
 
 <!-- SESSIONS -->
-<section class="section alt" id="sessions">
+<section class="section" id="sessions">
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow">Sessions · <span id="ss-count">4</span> videos</p>
@@ -217,7 +340,7 @@
 </section>
 
 <!-- TOOLKIT + COMMUNITY -->
-<section class="section" id="toolkit">
+<section class="section alt" id="toolkit">
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow">Toolkit</p>
@@ -278,7 +401,7 @@
   <div class="wrap foot-in">
     <span>Gurugram · <span id="clock" class="mono">--:--</span> IST</span>
     <span>Hand-built in HTML, CSS &amp; JS. No framework.</span>
-    <span>Press <kbd>⌘K</kbd> or type <kbd>ship</kbd></span>
+    <span>Press <kbd class="mod-k">⌘K</kbd> or type <kbd>ship</kbd></span>
   </div>
 </footer>
 
